@@ -16,8 +16,8 @@ import java.util.Base64;
 import java.util.List;
 
 public class SelfCertReader {
-    private String selfSignedCert ;
-    private String selfSignedPrivateKey ;
+    private String selfSignedCert;
+    private String selfSignedPrivateKey;
 
     private List<Certificate> chainAsList = new ArrayList<>();
 

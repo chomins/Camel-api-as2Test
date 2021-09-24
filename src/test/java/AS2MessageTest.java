@@ -45,7 +45,7 @@ public class AS2MessageTest {
 
     @BeforeClass
     public static void setUpOnce() throws Exception {
-        Security.addProvider(new BouncyCastleProvider());
+
         testServer = new AS2ServerConnection(AS2_VERSION,
                 "MyServer-HTTP/1.1",
                 SERVER_FQDN,
@@ -100,7 +100,7 @@ public class AS2MessageTest {
                 null,
                 null,
                 null,
-                null,"mrAS@example.org", new String[] {"sha1", "md5"},null,null);
+                null,"mrAS@example.org", null,null,null);
     }
 
     @Test

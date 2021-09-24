@@ -61,11 +61,9 @@ public class AS2SignedMessageTest {
                 try {
                     HttpEntity entity = ((HttpEntityEnclosingRequest)request).getEntity();
                     String result = IOUtils.toString(entity.getContent(), StandardCharsets.UTF_8);
-                    System.out.println("---------------------server---------------");
+                    System.out.println("-------------------request-----------------");
                     System.out.println(result);
-                    System.out.println("---------------------server---------------");
-                    context.setAttribute(SUBJECT, SUBJECT);
-                    context.setAttribute(FROM, FROM);
+                    System.out.println("-------------------request-----------------");
                 } catch (Exception e) {
                     throw new HttpException("Failed to parse AS2 Message Entity", e);
                 }
@@ -78,7 +76,8 @@ public class AS2SignedMessageTest {
         testServer.close();
     }
 
-    @Test public void  SignedMessageTest() throws Exception{
+    @Test
+    public void  SignedMessageTest() throws Exception{
 
         AS2ClientConnection clientConnection = new AS2ClientConnection(AS2_VERSION,USER_AGENT,CLIENT_FQDN,TARGET_HOST,TARGET_PORT);
         AS2ClientManager as2ClientManager = new AS2ClientManager(clientConnection);
@@ -92,6 +91,12 @@ public class AS2SignedMessageTest {
                 AS2SignatureAlgorithm.SHA1WITHRSA, selfCertReader.getChain(), selfCertReader.getPrivateKey(),
                 null,"mrAS@example.org", null,
                 AS2EncryptionAlgorithm.DES_EDE3_CBC, selfCertReader.getChain());
+
+        System.out.println("-------------response---------------");
+        HttpResponse response = httpCoreContext.getResponse();
+        String result = IOUtils.toString(response.getEntity().getContent(), StandardCharsets.UTF_8);
+        System.out.println(result);
+        System.out.println("-------------response---------------");
 
     }
 
